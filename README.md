@@ -1,4 +1,4 @@
-# WIP_TMF632_PartyManagement
+# TMF632_PartyManagement
 TM Forum Open APIs (Apache 2.0) Party Management API
 
 Provides standardized mechanism for party management such as creation, update,
