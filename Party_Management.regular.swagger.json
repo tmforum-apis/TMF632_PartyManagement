@@ -1,0 +1,1816 @@
+
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "## TMF API Reference : TMF 632 - Party Management\n\n### Release : 14.5 - June 2015\n\nThe party management API provides standardized mechanism for party management such as creation, update, retrieval, deletion and notification of events. Party can be an individual or an organization that has any kind of relation with the enterprise. Party is created to record individual or organization information before the assignment of any role. For example, within the context of a split billing mechanism, Party management API allows creation of the individual or organization that will play the role of 3 rd payer for a given offer and, then, allows consultation or update of his information.\n\n### Resources\n- Organization\n- Individual\n- Hub\n\n### Operations\nParty management API performs the following operations :\n- Retrieve an organization or an individual\n- Retrieve a collection of organizations or individuals according given criteria\n- Create a new organization or a new individual\n- Update an existing organization or an existing individual\n- Delete an existing organization or an existing individual\n- Notify events on organizatin or individual",
+    "version": "1.0.0",
+    "title": "API Party Management"
+  },
+  "host": "serverRoot",
+  "basePath":	"/tmf-api/partyManagement/v1/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json;charset=utf-8"
+  ],
+  "produces": [
+    "application/json;charset=utf-8"
+  ],
+  "tags": [
+  
+    {
+      "name": "Individual",
+      "description": ""
+    },
+    {
+      "name": "Organization",
+      "description": ""
+    },
+    {
+      "name": "Hub",
+      "description": ""
+    }
+  ],
+  "paths": {
+      "/individual": {
+      "post": {
+        "tags": [
+           "Individual"
+        ],        
+        "operationId": "individualCreate",
+        "summary": "Create an individual",
+        "description": "This operation is used to create an individual entity.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "Individual",
+            "required": true,
+            "in": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Individual"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Individual"
+            }
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+           "Individual"
+        ],        
+        "operationId": "individualFind",
+        "summary": "List individuals",
+        "description": "This operation lists individual entities (physical persons).\nAttribute selection is enabled for all first level attributes.\nFiltering may be available depending on the compliance level supported by an implementation.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "fields",
+            "required": false,
+            "in": "query",
+            "description": "Attribute selection",
+            
+              "type": "string"
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Requested index for start of resources to be provided in response requested by client",
+            
+              "type": "string"
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Requested number of resources to be provided in response requested by client",
+            
+              "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+              "$ref": "#/definitions/Individual"
+              }
+            },
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total number of items matching criteria",
+              "type": "integer",
+              "format": "int32"
+              },
+              "X-Result-Count": {
+                "description": "Actual nulber of items returned in the response body",
+              "type": "integer",
+              "format": "int32"
+              }
+            }
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      }
+    },
+      "/individual/{individualId}": {
+      "get": {
+        "tags": [
+           "Individual"
+        ],        
+        "operationId": "individualGet",
+        "summary": "Retrieve an individual",
+        "description": "This operation retrieves an individual entity (physical person).\nAttribute selection is enabled for all first level attributes.\nFiltering on sub-resources may be available depending on the compliance level supported by an implementation.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "individualId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the individual"
+          },
+          {
+            "name": "fields",
+            "required": false,
+            "in": "query",
+            "description": "Attribute selection",
+            
+              "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Individual"
+            }
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+           "Individual"
+        ],        
+        "operationId": "individualUpdate",
+        "summary": "Update completely an individual",
+        "description": "This operation allows to overwrite an existing individual entity.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "individualId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the individual"
+          },
+          {
+            "name": "Individual",
+            "required": true,
+            "in": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Individual"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Individual"
+            }
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+           "Individual"
+        ],        
+        "operationId": "individualPatch",
+        "summary": "Update partially an individual",
+        "description": "This operation partially updates an individual entity.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "individualId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the individual"
+          },
+          {
+            "name": "Individual",
+            "required": true,
+            "in": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Individual"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Individual"
+            }
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+           "Individual"
+        ],        
+        "operationId": "individualDelete",
+        "summary": "Delete an individual",
+        "description": "This operation is used to delete an existing individual entity.\nNote: this operation is available only to ADMIN API users.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "individualId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the individual"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      }
+    },
+      "/organization": {
+      "post": {
+        "tags": [
+           "Organization"
+        ],        
+        "operationId": "organizationCreate",
+        "summary": "Create an organization",
+        "description": "This operation is used to create an organization entity.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "Organization",
+            "required": true,
+            "in": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+           "Organization"
+        ],        
+        "operationId": "organizationFind",
+        "summary": "List organizations",
+        "description": "This operation lists organization entities (corporations).\nAttribute selection is enabled for all first level attributes.\nFiltering may be available depending on the compliance level supported by an implementation.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "fields",
+            "required": false,
+            "in": "query",
+            "description": "Attribute selection",
+            
+              "type": "string"
+          },
+          {
+            "name": "offset",
+            "required": false,
+            "in": "query",
+            "description": "Requested index for start of resources to be provided in response requested by client",
+            
+              "type": "integer",
+              "format": "int32"
+          },
+          {
+            "name": "limit",
+            "required": false,
+            "in": "query",
+            "description": "Requested number of resources to be provided in response requested by client",
+            
+              "type": "integer",
+              "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+              "$ref": "#/definitions/Organization"
+              }
+            },
+            "headers": {
+              "X-Total-Count": {
+                "description": "Total number of items matching criteria",
+              "type": "integer",
+              "format": "int32"
+              },
+              "X-Result-Count": {
+                "description": "Actual number of items returned in the response body",
+              "type": "integer",
+              "format": "int32"
+              }
+            }
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      }
+    },
+      "/organization/{organizationId}": {
+      "get": {
+        "tags": [
+           "Organization"
+        ],        
+        "operationId": "organizationGet",
+        "summary": "Retrieve an organization",
+        "description": "This operation retrieves an organization entity (corporation).\nAttribute selection is enabled for all first level attributes.\nFiltering on sub-resources may be available depending on the compliance level supported by an implementation.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "organizationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the organization"
+          },
+          {
+            "name": "fields",
+            "required": false,
+            "in": "query",
+            "description": "Attribute selection",
+            
+              "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+           "Organization"
+        ],        
+        "operationId": "organizationUpdate",
+        "summary": "Update completely an organization",
+        "description": "This operation allows to overwrite an existing organization entity.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "organizationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the organization"
+          },
+          {
+            "name": "Organization",
+            "required": true,
+            "in": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+           "Organization"
+        ],        
+        "operationId": "organizationPatch",
+        "summary": "Update partially an organization",
+        "description": "This operation partially updates an organization entity.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "organizationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the organization"
+          },
+          {
+            "name": "Organization",
+            "required": true,
+            "in": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Organization"
+            }
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+           "Organization"
+        ],        
+        "operationId": "organizationDelete",
+        "summary": "Delete an organization",
+        "description": "This operation is used to delete an existing organization entity.\nNote: this operation is available only to ADMIN API users.\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "organizationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Unique identifier of the organization"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      }
+    },
+      "/hub": {
+      "post": {
+        "tags": [
+           "Hub"
+        ],        
+        "operationId": "hubCreate",
+        "summary": "Register a listener",
+        "description": "Sets the communication endpoint address the service instance must use to deliver information about its health state, execution state, failures and metrics\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "data",
+            "required": true,
+            "in": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/HubInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Hub"
+            }
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      }
+    },
+      "/hub/{hubId}": {
+      "delete": {
+        "tags": [
+           "Hub"
+        ],        
+        "operationId": "hubDelete",
+        "summary": "Unregister a listener",
+        "description": "Clears the communication endpoint address that was set by creating the Hub\n\nSpecific business errors for current operation will be encapsulated in\n\nHTTP Response 422 Unprocessable entity\n",
+        "deprecated": false,
+        
+        "parameters": [
+          
+          {
+            "name": "hubId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+
+          },
+          "400": {
+            
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "405": {
+            
+            "description": "Method Not Allowed\n\nList of supported error codes:\n- 61: Method not allowed",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+            
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      }
+    }
+  },
+"definitions": {
+  
+
+    "ErrorRepresentation": {
+      "description": "Standard tmf error representation",
+
+      
+      "required": [
+          
+            "code",
+            "reason"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Application related code (as defined in the API or from a common list)",
+              "type": "integer",
+              "format": "int32"
+        },
+        "reason": {
+          "description": "Text that explains the reason for error. This can be shown to a client user.",
+              "type": "string"
+        },
+        "message": {
+          "description": "Text that provides more details and corrective actions related to the error. This can be shown to a client user.",
+              "type": "string"
+        },
+        "status": {
+          "description": "http error code extension like 400-2",
+              "type": "string"
+        },
+        "referenceError": {
+          "description": "url pointing to documentation describing the error",
+              "type": "string"
+        },
+        "@type": {
+          "description": "Class type of the resource",
+              "type": "string"
+        },
+        "@schemaLocation": {
+          "description": "Link to schema describing this REST resource",
+              "type": "string"
+        }
+      }
+      
+    },
+
+    "Individual": {
+      "description": "",
+
+      
+      "required": [
+          
+            "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the individual",
+              "type": "string"
+        },
+        "href": {
+          "description": "Reference of th individual",
+              "type": "string"
+        },
+        "gender": {
+          "description": "Gender",
+              "type": "string"
+        },
+        "placeOfBirth": {
+          "description": "An hyperlink to the place of birth",
+              "type": "string"
+        },
+        "countryOfBirth": {
+          "description": "The country of birth",
+              "type": "string"
+        },
+        "nationality": {
+          "description": "Nationality",
+              "type": "string"
+        },
+        "maritalStatus": {
+          "description": "Marital status (married, divorced, widow ...)",
+              "type": "string"
+        },
+        "birthDate": {
+          "description": "Birth date",
+              "type": "string",
+              "format": "date"
+        },
+        "title": {
+          "description": "Useful for titles (aristocratic, social,...) Pr, Dr, Sir, ...",
+              "type": "string"
+        },
+        "givenName": {
+          "description": "First name",
+              "type": "string"
+        },
+        "familyName": {
+          "description": "Last name",
+              "type": "string"
+        },
+        "middleName": {
+          "description": "Middles names",
+              "type": "string"
+        },
+        "fullName": {
+          "description": "Full name flatten (first, middle, and last names)",
+              "type": "string"
+        },
+        "formattedName": {
+          "description": "A formatted name useful for specific contexts ( Chinese, Japanese, Korean, ...)",
+              "type": "string"
+        },
+        "location": {
+          "description": "Temporary current location od the individual (may be used if the individual has approved its sharing)",
+              "type": "string"
+        },
+        "status": {
+          "description": "Status of the individual - initialized, validated, deceased...",
+              "type": "string"
+        },
+        "disability": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/Disability"
+          }
+        },
+        "characteristic": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/Characteristic"
+          }
+        },
+        "otherName": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/OtherNameIndividual"
+          }
+        },
+        "individualIdentification": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/IndividualIdentification"
+          }
+        },
+        "externalReference": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/ExternalReference"
+          }
+        },
+        "relatedParty": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/RelatedParty"
+          }
+        },
+        "contactMedium": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/ContactMedium"
+          }
+        }
+      }
+      
+    },
+
+    "Characteristic": {
+      "description": "",
+
+      
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the characteristic",
+              "type": "string"
+        },
+        "value": {
+          "description": "Value of the characteristic",
+              "type": "string"
+        }
+      }
+      
+    },
+
+    "OtherNameIndividual": {
+      "description": "",
+
+      
+      "type": "object",
+      "properties": {
+        "title": {
+          "description": "Use for titles (aristrocatic, social, ...): Pr, Dr, Sir,....",
+              "type": "string"
+        },
+        "givenName": {
+          "description": "First name",
+              "type": "string"
+        },
+        "familyName": {
+          "description": "Last name",
+              "type": "string"
+        },
+        "middleName": {
+          "description": "Middle names",
+              "type": "string"
+        },
+        "fullName": {
+          "description": "Full name flatten (first, middle, and last names)",
+              "type": "string"
+        },
+        "formattedName": {
+          "description": "A formatted name useful for specific context (Chinese, Japanese, Korean,...)",
+              "type": "string"
+        },
+        "validFor": {
+          
+              "$ref": "#/definitions/ValidFor"
+        }
+      }
+      
+    },
+
+    "IndividualIdentification": {
+      "description": "",
+
+      
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Identification type (passport, national identity card, driver's license, ....)",
+              "type": "string"
+        },
+        "identificationId": {
+          "description": "Identifier",
+              "type": "string"
+        },
+        "issuingAuthority": {
+          "description": "Authority which has issued the identifier (social security, town hall, ...)",
+              "type": "string"
+        },
+        "issuingDate": {
+          "description": "Date at wich the identifier was issued",
+              "type": "string",
+              "format": "date-time"
+        }
+      }
+      
+    },
+
+    "ExternalReference": {
+      "description": "",
+
+      
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "External reference",
+              "type": "string"
+        },
+        "type": {
+          "description": "Reference type",
+              "type": "string"
+        }
+      }
+      
+    },
+
+    "RelatedParty": {
+      "description": "",
+
+      
+      "required": [
+          
+            "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique identifier of related party",
+              "type": "string"
+        },
+        "href": {
+          "description": "Reference of the related party, could be a party reference or a partyRole reference",
+              "type": "string"
+        },
+        "role": {
+          "description": "Role of the related party",
+              "type": "string"
+        },
+        "name": {
+          "description": "name of the related party",
+              "type": "string"
+        },
+        "validFor": {
+          
+              "$ref": "#/definitions/ValidFor"
+        }
+      }
+      
+    },
+
+    "ContactMedium": {
+      "description": "",
+
+      
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Email address, telephone number, postal address",
+              "type": "string"
+        },
+        "preferred": {
+          "description": "if true, indicates that is the preferres contact medium",
+              "type": "boolean"
+        },
+        "validFor": {
+          
+              "$ref": "#/definitions/ValidFor"
+        },
+        "medium": {
+          
+              "$ref": "#/definitions/Medium"
+        }
+      }
+      
+    },
+
+    "ValidFor": {
+      "description": "",
+
+      
+      "type": "object",
+      "properties": {
+        "startDateTime": {
+          "description": "",
+              "type": "string",
+              "format": "date-time"
+        },
+        "endDateTime": {
+          "description": "",
+              "type": "string",
+              "format": "date-time"
+        }
+      }
+      
+    },
+
+    "Medium": {
+      "description": "",
+
+      
+      "type": "object",
+      "properties": {
+        "city": {
+          "description": "City",
+              "type": "string"
+        },
+        "country": {
+          "description": "",
+              "type": "string"
+        },
+        "postcode": {
+          "description": "Postcode",
+              "type": "string"
+        },
+        "stateOrProvince": {
+          "description": "State or province",
+              "type": "string"
+        },
+        "streetOne": {
+          "description": "Describes the street",
+              "type": "string"
+        },
+        "streetTwo": {
+          "description": "Complementary street description",
+              "type": "string"
+        },
+        "emailAddress": {
+          "description": "Full email address in standard format",
+              "type": "string"
+        },
+        "type": {
+          "description": "Type of medium (fax, mobile phone...)",
+              "type": "string"
+        },
+        "number": {
+          "description": "Phone number",
+              "type": "string"
+        }
+      }
+      
+    },
+
+    "Disability": {
+      "description": "",
+
+      
+      "type": "object",
+      "properties": {
+        "disability": {
+          "description": "Physical or mental handicap",
+              "type": "string"
+        }
+      }
+      
+    },
+
+    "Organization": {
+      "description": "",
+
+      
+      "required": [
+          
+            "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique identifier of the organization",
+              "type": "string"
+        },
+        "href": {
+          "description": "Reference of the organization",
+              "type": "string"
+        },
+        "isLegalEntity": {
+          "description": "To tag if the organization is legal entity known by national referential",
+              "type": "boolean"
+        },
+        "type": {
+          "description": "Type of Organization (Compagny, ...)",
+              "type": "string"
+        },
+        "existsDuring": {
+          
+              "$ref": "#/definitions/ExistsDuring"
+        },
+        "tradingName": {
+          "description": "The name that the organization (unit) trades under",
+              "type": "string"
+        },
+        "nameType": {
+          "description": "Co, Inc, Ltd, Pty Ltd, Plc, Gmbh,....",
+              "type": "string"
+        },
+        "status": {
+          "description": "Status of the organization (initialzed, validated, closed)",
+              "type": "string"
+        },
+        "otherName": {
+          
+              "$ref": "#/definitions/OtherNameOrganization"
+        },
+        "characteristic": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/Characteristic"
+          }
+        },
+        "organizationIdentification": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/OrganizationIdentification"
+          }
+        },
+        "externalReference": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/ExternalReference"
+          }
+        },
+        "relatedParty": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/RelatedParty"
+          }
+        },
+        "organizationParentRelationship": {
+          
+              "$ref": "#/definitions/OrganizationParentRelationship"
+        },
+        "organizationChildRelationship": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/OrganizationChildRelationship"
+          }
+        },
+        "contactMedium": {
+          
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/ContactMedium"
+          }
+        }
+      }
+      
+    },
+
+    "ExistsDuring": {
+      "description": "",
+
+      
+      "type": "object",
+      "properties": {
+        "startDateTime": {
+          "description": "",
+              "type": "string",
+              "format": "date-time"
+        },
+        "endDateTime": {
+          "description": "",
+              "type": "string",
+              "format": "date-time"
+        }
+      }
+      
+    },
+
+    "OrganizationIdentification": {
+      "description": "",
+
+      
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of identification information used to identify the company in country or internationaly",
+              "type": "string"
+        },
+        "identificationId": {
+          "description": "Identifier",
+              "type": "string"
+        },
+        "issuingAuthority": {
+          "description": "Authority which has issued the identifier (chamber of commerce...)",
+              "type": "string"
+        },
+        "issuingDate": {
+          "description": "Date at which the identifier was issued",
+              "type": "string",
+              "format": "date-time"
+        },
+        "validFor": {
+          
+              "$ref": "#/definitions/ValidFor"
+        }
+      }
+      
+    },
+
+    "OrganizationParentRelationship": {
+      "description": "",
+
+      
+      "required": [
+          
+            "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique identifier of the parent organization",
+              "type": "string"
+        },
+        "href": {
+          "description": "Reference of the parent organization",
+              "type": "string"
+        },
+        "relationshipType": {
+          "description": "Juridical, hierarchical, geopraphical, functional....",
+              "type": "string"
+        },
+        "validFor": {
+          
+              "$ref": "#/definitions/ValidFor"
+        }
+      }
+      
+    },
+
+    "OrganizationChildRelationship": {
+      "description": "",
+
+      
+      "required": [
+          
+            "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique identifier of child organization",
+              "type": "string"
+        },
+        "href": {
+          "description": "Reference of the child organization",
+              "type": "string"
+        },
+        "relationshipType": {
+          "description": "Juridical, hierarchcal, goegraphical, functional...",
+              "type": "string"
+        },
+        "validFor": {
+          
+              "$ref": "#/definitions/ValidFor"
+        }
+      }
+      
+    },
+
+    "Hub": {
+      "description": "A HUB resource is used by client side to subscribe to notification(s)",
+
+      
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique identifier of the hub",
+              "type": "string"
+        },
+        "callback": {
+          "description": "The callback being registered",
+              "type": "string"
+        },
+        "query": {
+          "description": "Additional data to be passed",
+              "type": "string"
+        }
+      }
+      
+    },
+
+    "OtherNameOrganization": {
+      "description": "",
+
+      
+      "type": "object",
+      "properties": {
+        "nameType": {
+          "description": "Co. , Inc. , Ltd. , Pty Ltd. , Plc; , Gmbh",
+              "type": "string"
+        },
+        "tradingName": {
+          "description": "The name that the organization trades under",
+              "type": "string"
+        },
+        "validFor": {
+          
+              "$ref": "#/definitions/ValidFor"
+        }
+      }
+      
+    },
+
+    "HubInput": {
+      "description": "A HUB resource is used by client side to subscribe to notification(s)",
+
+      
+      "type": "object",
+      "properties": {
+        "callback": {
+          "description": "The callback being registered",
+              "type": "string"
+        },
+        "query": {
+          "description": "Additional data to be passed",
+              "type": "string"
+        }
+      }
+      
+    }
+  }
+}
+	
